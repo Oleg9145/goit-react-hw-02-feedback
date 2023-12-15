@@ -29,7 +29,9 @@ class Feedback extends Component  {
       isContentVisible: !prevState.isContentVisible
     }));
   };
-  render() {
+ 
+  render() { 
+    const totalFeedback = this.countTotalFeedback();
     return (
       <div>
         <Section title="Please leave feedback">
@@ -38,15 +40,18 @@ class Feedback extends Component  {
             onLeaveFeedback={this.handleFeedback}
           />
         </Section>
+        
+        
 
-        <Section title="Statistics">
-          <Statistics
+
+        <Section title="Statistics" >
+        {totalFeedback > 0 ? <Statistics
             good={this.state.good}
             neutral={this.state.neutral}
             bad={this.state.bad}
             total={this.countTotalFeedback()}
             positivePercentage={this.countPositiveFeedbackPercentage()}
-          />
+          /> : <p>There is no feedback</p>} 
         </Section>
       </div>
     );
